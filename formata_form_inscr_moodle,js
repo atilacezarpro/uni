@@ -1,0 +1,295 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let usernameField = document.querySelector('input[name="username"]');
+    if (usernameField) {
+        usernameField.addEventListener('input', function () {
+            // Se o valor for um dos usuários permitidos, permite
+            if (this.value === 'neadsuporte' || this.value === 'suporte') {
+                return; // Permite o valor sem alterações
+            }
+            // Remove qualquer caractere que não seja número e limita a 11 dígitos
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);
+        });
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.pathname === "/login/signup.php") {
+        // Adiciona o estilo CSS diretamente
+        const style = document.createElement("style");
+        style.textContent = `
+/* Fundo da página */
+body.pagelayout-login #page {
+    background-color: #f2f2f2;
+}
+
+/* Ajusta e Oculta Campos */
+.login-container {
+    margin-bottom: 50px;
+    margin-top: 70px;
+}
+
+/* Ocultar o legend "Outros campos" */
+.signupform legend.d-flex.align-items-center {
+    display: none !important;
+}
+
+
+.login-container h1.login-heading {
+    display: none !important;
+}
+
+/* Cabeçalho fixo */
+#custom-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none !important;   
+
+}
+
+#custom-header img {
+    height: 40px;
+}
+
+#custom-header h1 {
+    font-size: 18px;
+    margin: 0;
+    color: black;
+}
+
+/* Subheader responsivo */
+#custom-subheader {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #3B448B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
+    padding: 10px 0;
+    z-index: 999;
+    color: white;
+    gap: 10px; /* Espaço entre os itens */
+}
+
+#custom-subheader .step {
+    margin: 5px; /* Ajusta o espaçamento entre os passos */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Ocultar subheader em telas menores que 800px */
+@media (max-width: 800px) {
+    #custom-subheader {
+        display: none;
+    }
+}
+
+
+
+/* Rodapé fixo */
+#custom-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #3B448B;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulário */
+
+            .login-container {
+                margin-top: 90px; /* Espaço para o cabeçalho */
+                margin-bottom: 70px; /* Espaço para o rodapé */
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 95%;
+                max-width: 1200px; /* Limita a largura máxima */
+                margin-left: auto;
+                margin-right: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo */
+                gap: 20px; /* Espaçamento entre os campos */
+            }
+
+.signupform-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signupform-header img {
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+.signupform-header h2 {
+    font-size: 24px;
+    color: #2F4268;
+    margin: 0;
+}
+
+/* Reorganização visual dos campos */
+.signupform .fitem {
+    order: 0;
+}
+
+.signupform #fitem_id_firstname {
+    order: 1;
+}
+
+.signupform #fitem_id_lastname {
+    order: 2;
+}
+
+.signupform #fitem_id_username {
+    order: 3;
+}
+
+.signupform #fitem_id_email {
+    order: 4;
+}
+
+.signupform #fitem_id_email2 {
+    order: 5;
+}
+
+.signupform #fitem_id_password {
+    order: 6;
+}
+
+.signupform #fitem_id_profile_field_Telefone {
+    order: 7;
+}
+
+.signupform #fitem_id_profile_field_Curso {
+    order: 8;
+}
+
+.signupform #fitem_id_profile_field_concluiu {
+    order: 9;
+}
+
+.signupform #fitem_id_profile_field_cidade {
+    order: 10;
+}
+
+.signupform .fgroup {
+    order: 11;
+}
+
+/* Ocultar campos */
+.signupform #fitem_id_city,
+.signupform #fitem_id_country {
+    display: none;
+}
+`;
+        document.head.appendChild(style);
+
+        // Criação do cabeçalho
+        const header = document.createElement("div");
+        header.id = "custom-header";
+        header.innerHTML = `
+           <a href="https://vestibular.univar.io/"> <img src="https://vestibular.univar.io/pluginfile.php/1/theme_moove/logo/1733174664/Logo%20Univar%20Titulo%20azul%20Completa%20%281%29%20%281%29.svg" alt="Logo"></a>
+            <!-- <h1>Vestibular Online - Inscrição</h1> -->
+        `;
+        document.body.prepend(header);
+
+        // Criação do cabeçalho adicional
+        const subheader = document.createElement("div");
+        subheader.id = "custom-subheader";
+        subheader.innerHTML = `
+            <div class="step active">Inscrição</div>
+            <div class="step disabled">Confirmação</div>
+            <div class="step disabled">Prova</div>
+            <div class="step disabled">Resultado</div>
+            <div class="step disabled">Matrícula</div>
+        `;
+        document.body.prepend(subheader);
+
+        // Criação do rodapé
+        const footer = document.createElement("div");
+        footer.id = "custom-footer";
+        footer.innerHTML = `
+            <p>&copy; 2024 UNIVAR. Todos os direitos reservados.</p>
+        `;
+        document.body.appendChild(footer);
+
+        // Adicionar cabeçalho visual ao formulário
+        const form = document.querySelector(".signupform");
+        if (form) {
+            const formHeader = document.createElement("div");
+            formHeader.classList.add("signupform-header");
+            formHeader.innerHTML = `
+                <img src="https://lh3.googleusercontent.com/d/1K6dRZJeNaw0tvxBf36Sm4hyv1Qmox2Jd" width="100%">
+                <h2>Formulário de Inscrição</h2>
+            `;
+            form.prepend(formHeader);
+
+            // Alterar o texto do botão "Criar minha conta" para "Fazer minha inscrição"
+            const submitButton = form.querySelector("#id_submitbutton");
+            if (submitButton) {
+                submitButton.value = "Fazer minha inscrição";
+            }
+        }
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    let telefoneField = document.querySelector('#id_profile_field_Telefone');
+    if (telefoneField) {
+        // Adiciona o placeholder ao campo de telefone
+        telefoneField.placeholder = '(66) 99999-9999';
+
+        // Função para aplicar a máscara ao número
+        telefoneField.addEventListener('input', function () {
+            // Remove tudo que não for número
+            let value = telefoneField.value.replace(/\D/g, '');
+            let formattedValue = '';
+
+            // Aplica a formatação gradativa
+            if (value.length > 0) {
+                formattedValue = '(' + value.substring(0, 2);
+            }
+            if (value.length > 2) {
+                formattedValue += ') ' + value.substring(2, 7);
+            }
+            if (value.length > 7) {
+                formattedValue += '-' + value.substring(7, 11);
+            }
+
+            telefoneField.value = formattedValue;
+        });
+
+        // Permite apagar os números sem travar na máscara
+        telefoneField.addEventListener('keydown', function (event) {
+            if (event.key === 'Backspace' || event.key === 'Delete') {
+                // Se a tecla for Backspace ou Delete, permite apagar
+                this.value = this.value.replace(/[\D]/g, '').slice(0, this.value.length - 1);
+                this.dispatchEvent(new Event('input')); // Dispara o evento de input para aplicar a formatação
+            }
+        });
+    }
+});
+</script>
